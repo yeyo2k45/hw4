@@ -1,7 +1,9 @@
-class ApplicationController < ActionController::Base
-  before_action :current_user
+def index
 
-  def current_user
-    puts "------------------ code before every request ------------------"
+  if @current_user
+@posts = Post.where({"user_id" => @current_user["id"] })
+    @post = Post.new
+  
   end
+
 end
