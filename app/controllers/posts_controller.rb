@@ -1,21 +1,16 @@
 class PostsController < ApplicationController
-
-
-
   def new
     if @current_user
       @post = Post.new
       @post.place_id = params["place_id"]
     end
   end
-  
   def index
     if @current_user
       @posts = Post.where({"user_id" => @current_user["id"] })
       @post = Post.new
     end
-  end
-  
+  end  
   def create
     @post = Post.new
     @post["title"] = params["post"]["title"]
@@ -27,9 +22,6 @@ class PostsController < ApplicationController
     @post.save
     redirect_to "/places/#{@post["place_id"]}"
   end
-  
-  
-  
   def destroy
     @post = Post.find_by({ "id" => params["id"] })
     if @post["user_id"] == @current_user["id"]
@@ -37,8 +29,6 @@ class PostsController < ApplicationController
     end
     redirect_to "/posts"
   end
-
-
 end
 
 
